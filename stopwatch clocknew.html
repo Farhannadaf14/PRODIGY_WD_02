@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOPWATCH</title>
+    <style>
+        #watch {
+            font-size: 50px;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .Clock{
+            margin-left: 40%;
+            margin-top: 15%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="Clock">
+        <span id="watch">00:00:00</span><br><br>
+        <input type="button" onclick="startClock()" value="Start">
+        <input type="button" onclick="stopClock()" value="Stop">
+        <input type="button" onclick="resetClock()" value="Reset">
+        <input type="button" onclick="lapClock" value="Lap">
+    </div>
+    <script>
+        const timer = document.getElementById("watch");
+        var seconds = 0;
+        var minutes = 0;
+        var hours = 0;
+        var stoptime = true;
+
+        function startClock() {
+            if (stoptime == true) {
+                stoptime = false;
+                timerCycle();
+            }
+        }
+        function stopClock() {
+            if (stoptime == false) {
+                stoptime = true;
+            }
+        }
+
+        function timerCycle() {
+            if (stoptime == false) {
+                seconds = parseInt(seconds);
+                minutes = parseInt(minutes);
+                hours = parseInt(hours);
+
+                seconds = seconds + 1;
+                if (seconds >= 60) {
+                    seconds = 0;
+                    minutes = minutes + 1;
+                }
+                if (minutes >= 60) {
+                    minutes = 0;
+                    hours = hours + 1;
+                }
+                if (seconds < 10) {
+                    seconds = "0" + seconds;
+                }
+                if (minutes < 10) {
+                    minutes = "0" + minutes;
+                }
+                if (hours < 10) {
+                    hours = "0" + hours;
+                }
+                timer.innerHTML = hours + ":" + minutes + ":" + seconds;
+                setTimeout("timerCycle()", 1000);
+            }
+        }
+
+        function resetClock() {
+            timer.innerHTML = "00:00:00";
+            stoptime = true;
+            hours = 0;
+            seconds = 0;
+            minutes = 0;
+        }
+        function lapClock(){   
+        }
+    </script>
+</body>
+
+</html>
